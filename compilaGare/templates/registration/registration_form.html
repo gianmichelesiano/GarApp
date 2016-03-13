@@ -1,0 +1,26 @@
+{% extends "base2.html" %}
+
+{% load bootstrap3 %}
+{% load i18n %}
+
+{% block content %}
+<form method="post" action=".">
+  {% csrf_token %}
+  {% bootstrap_form form %}
+    {% buttons %}
+        <button type="submit" class="btn btn-success" value="{% trans 'Submit' %}">
+            {% bootstrap_icon "star" %} Submit
+        </button>
+    {% endbuttons %}
+</form>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
