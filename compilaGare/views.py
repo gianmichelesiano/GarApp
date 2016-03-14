@@ -16,6 +16,9 @@ from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import inch
+from reportlab.lib import colors
+from reportlab.lib.pagesizes import  inch
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
 
 
 def post_list(request):
@@ -66,12 +69,6 @@ def some_view(request):
     buffer.close()
     response.write(pdf)
     return response
-# Create your views here
-
-
-
-# Create your views here
-
 
 
 from reportlab.lib.pagesizes import letter, A4
@@ -86,8 +83,8 @@ class MyPrint:
         self.width, self.height = self.pagesize
         
     def genera_pdf(self):
-    # Create the HttpResponse object with the appropriate PDF headers.
 
+    # Create the HttpResponse object with the appropriate PDF headers.
         buffer = self.buffer
         
         p = canvas.Canvas(buffer)
@@ -173,7 +170,45 @@ class MyPrint:
         pdf = buffer.getvalue()
         buffer.close()
         return pdf
-
+    def generaTabella(self):
+        
+        buffer = self.buffer
+        
+        p = canvas.Canvas(buffer)
+        
+        doc = SimpleDocTemplate(buffer,pagesize=letter,
+                            rightMargin=72,leftMargin=72,
+                            topMargin=72,bottomMargin=18)
+        elements = []
+        
+        indirizzo  = """fsdf
+        /n fdsf
+        """
+        data= [['intestazione', 'intestazione'],
+               ['intestazione', 'intestazione'],
+               ['intestazione', 'intestazione'],
+               ['Indirzzo', 'Indirzzo'],
+               ['Indirzzo', 'Indirzzo'],
+               [indirizzo, 'Indirzzo']]
+        t=Table(data,280, 106)
+        t.setStyle(TableStyle([('ALIGN',(0,0),(1,2),'CENTER'),
+                               ('TEXTCOLOR',(0,0),(1,2),colors.black),
+                               ('VALIGN',(0,0),(1,2),'MIDDLE'),
+                               ('ALIGN',(0,3),(-1,-1),'LEFT'),
+                               ('TEXTCOLOR',(0,3),(-1,-1),colors.black),
+                               ('VALIGN',(0,3),(-1,-1),'MIDDLE'),
+                               ('INNERGRID', (0,0), (-1,-1), 0.25, colors.black),
+                               ('BOX', (0,0), (-1,-1), 0.25, colors.black),
+                               ]))
+         
+        elements.append(t)
+        # write the document to disk
+        doc.build(elements)
+        
+        pdf = buffer.getvalue()
+        buffer.close()
+        return pdf
+        
 from io import BytesIO
 def doc_base(request):
 
@@ -182,6 +217,15 @@ def doc_base(request):
     buffer = BytesIO()
     report = MyPrint(buffer, 'Letter')
     pdf = report.genera_pdf()
+    response.write(pdf)
+    return response
+from io import BytesIO
+def tabella(request):
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="Documenti.pdf"'
+    buffer = BytesIO()
+    report = MyPrint(buffer, 'Letter')
+    pdf = report.generaTabella()
     response.write(pdf)
     return response
 
