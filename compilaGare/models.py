@@ -16,3 +16,18 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+
+SESSO_CHOICES = (
+    ('M', 'M'),
+    ('F', 'F'),
+)
+# Create your models here.
+class Soggetto(models.Model):
+    ruolo = models.CharField(max_length=30)
+    cognome = models.CharField(max_length=30)
+    nome = models.CharField(max_length=30)
+    indirizzo = models.CharField(max_length=50)
+    citta = models.CharField(max_length=20)
+    data_di_nascita = models.DateField(blank=True, null=True)
+    sesso  = models.CharField(max_length=1, choices=SESSO_CHOICES)

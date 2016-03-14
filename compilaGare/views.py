@@ -1,9 +1,9 @@
 # -*- coding: cp1252 -*-
 from django.shortcuts import render
 from django.utils import timezone
-from .models import Post
+from .models import Post, Soggetto
 from django.shortcuts import render, get_object_or_404
-from .forms import PostForm
+from .forms import PostForm, SoggetoForm
 from django.shortcuts import redirect
 from io import BytesIO
 from reportlab.pdfgen import canvas
@@ -28,6 +28,8 @@ def post_list(request):
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     return render(request, 'compilaGare/post_detail.html', {'post': post})
+
+
 
 def drag(request):
     return render(request, 'compilaGare/drag.html', {'post': ''})
@@ -229,3 +231,35 @@ def tabella(request):
     response.write(pdf)
     return response
 
+
+# OPERAZIONI SOGGETTO
+def soggetto_new(request):
+    if request.method == "POST":
+        form = SoggetoForm(request.POST)
+        if form.is_valid():
+            soggetto = form.save(commit=False)
+            soggetto.save()
+            return redirect('compilaGare.views.soggetto_detail', pk=soggetto.pk)
+    else:
+        form = SoggetoForm()
+    return render(request, 'compilaGare/soggetto_new.html', {'form': form})
+
+def soggetto_detail(request, pk):
+    soggetto = get_object_or_404(Soggetto, pk=pk)
+    return render(request, 'compilaGare/soggetto_detail.html', {'soggetto': soggetto})
+
+def soggetto_edit(request, pk):
+    soggetto = get_object_or_404(Soggetto, pk=pk)
+    if request.method == "POST":
+        form = SoggetoForm(request.POST, instance=soggetto)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            return redirect('compilaGare.views.soggetto_detail', pk=soggetto.pk)
+    else:
+        form = SoggetoForm(instance=soggetto)
+    return render(request, 'compilaGare/soggetto_new.html', {'form': form})
+
+# OPERAZIONI GARA
+
+# OPERAZIONI IMPRESA

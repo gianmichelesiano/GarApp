@@ -12,5 +12,9 @@ urlpatterns = [
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^drag/$', views.drag, name='drag'),  
     url(r'^post/doc_base/$', views.doc_base, name='doc_base'),
-    url(r'^post/tabella/$', views.tabella, name='tabella'), 
+    url(r'^post/tabella/$', views.tabella, name='tabella'),
+    
+    url(r'^soggetto/new/$', views.soggetto_new, name='soggetto_new'),
+    url(r'^soggetto/(?P<pk>[0-9]+)/$', views.soggetto_detail, name='soggetto_detail'), 
+    url(r'^soggetto/(?P<pk>[0-9]+)/edit/$', views.soggetto_edit, name='soggetto_edit'), 
 ]
