@@ -7,7 +7,6 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
         <title>MagicWrite</title>
-
         <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
         <link rel="stylesheet" href="{% static 'fonts/css/font-awesome.min.css' %}">
         <link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
@@ -17,10 +16,6 @@
         <link rel="stylesheet" type="text/css" media="screen" href="{% static 'drag/style.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/floatexamples.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'js/skycons/skycons.min.js' %}">
-
-
-		
- 
     </head>
 
 
@@ -56,19 +51,27 @@
 						<div class="menu_section">
 							<h3>General</h3>
 							<ul class="nav side-menu">
-								<li><a><i class="fa fa-home"></i> Menu1 <span class="fa fa-chevron-down"></span></a>
+								<li><a><i class="fa fa-home"></i> Gara <span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu" style="display: none">
-										<li><a href="empty.html">Sub1.1</a>
+										<li><a href="/gara/new/">Nuova Gara</a>
 										</li>
-										<li><a href="empty.html">Sub1.2</a>
+										<li><a href="/gara/list/">Lista Gare</a>
 										</li>
 									</ul>
 								</li>
-								<li><a><i class="fa fa-edit"></i> Menu2 <span class="fa fa-chevron-down"></span></a>
+								<li><a><i class="fa fa-edit"></i> Azienda <span class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu" style="display: none">
-										<li><a href="empty.html">Menu2.1</a>
+										<li><a href="/azienda/new/">Nuova Azienda</a>
 										</li>
-										<li><a href="empty.html">Meny2.2s</a>
+										<li><a href="empty.html">Lista Azienda</a>
+										</li>
+									</ul>
+								</li>
+								<li><a><i class="fa fa-edit"></i> Soggetti <span class="fa fa-chevron-down"></span></a>
+									<ul class="nav child_menu" style="display: none">
+										<li><a href="/soggetti/new/">Nuovo Soggetto</a>
+										</li>
+										<li><a href="empty.html">Lista Soggetti</a>
 										</li>
 									</ul>
 								</li>

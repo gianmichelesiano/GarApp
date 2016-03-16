@@ -1,9 +1,9 @@
 # -*- coding: cp1252 -*-
 from django.shortcuts import render
 from django.utils import timezone
-from .models import Post, Soggetto
+from .models import Post, Soggetto, Gara, Azienda
 from django.shortcuts import render, get_object_or_404
-from .forms import PostForm, SoggetoForm
+from .forms import PostForm, SoggetoForm, GaraForm, AziendaForm
 from django.shortcuts import redirect
 from io import BytesIO
 from reportlab.pdfgen import canvas
@@ -261,5 +261,57 @@ def soggetto_edit(request, pk):
     return render(request, 'compilaGare/soggetto_new.html', {'form': form})
 
 # OPERAZIONI GARA
+def gara_new(request):
+    if request.method == "POST":
+        form = GaraForm(request.POST)
+        if form.is_valid():
+            gara = form.save(commit=False)
+            gara.save()
+            return redirect('compilaGare.views.gara_detail', pk=gara.pk)
+    else:
+        form = GaraForm()
+    return render(request, 'compilaGare/gara_new.html', {'form': form})
+
+def gara_detail(request, pk):
+    gara = get_object_or_404(Gara, pk=pk)
+    return render(request, 'compilaGare/gara_detail.html', {'gara': gara})
+
+def gara_edit(request, pk):
+    gara = get_object_or_404(Gara, pk=pk)
+    if request.method == "POST":
+        form = GaraForm(request.POST, instance=gara)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            return redirect('compilaGare.views.gara_detail', pk=gara.pk)
+    else:
+        form = GaraForm(instance=gara)
+    return render(request, 'compilaGare/gara_new.html', {'form': form})
 
 # OPERAZIONI IMPRESA
+def azienda_new(request):
+    if request.method == "POST":
+        form = AziendaForm(request.POST)
+        if form.is_valid():
+            azienda = form.save(commit=False)
+            azienda.save()
+            return redirect('compilaGare.views.azienda_detail', pk=azienda.pk)
+    else:
+        form = AziendaForm()
+    return render(request, 'compilaGare/azienda_new.html', {'form': form})
+
+def azienda_detail(request, pk):
+    azienda = get_object_or_404(Azienda, pk=pk)
+    return render(request, 'compilaGare/azienda_detail.html', {'azienda': azienda})
+
+def azienda_edit(request, pk):
+    azienda = get_object_or_404(Azienda, pk=pk)
+    if request.method == "POST":
+        form = AziendaForm(request.POST, instance=azienda)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            return redirect('compilaGare.views.azienda_detail', pk=azienda.pk)
+    else:
+        form = AziendaForm(instance=azienda)
+    return render(request, 'compilaGare/azienda_new.html', {'form': form})

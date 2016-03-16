@@ -16,5 +16,13 @@ urlpatterns = [
     
     url(r'^soggetto/new/$', views.soggetto_new, name='soggetto_new'),
     url(r'^soggetto/(?P<pk>[0-9]+)/$', views.soggetto_detail, name='soggetto_detail'), 
-    url(r'^soggetto/(?P<pk>[0-9]+)/edit/$', views.soggetto_edit, name='soggetto_edit'), 
+    url(r'^soggetto/(?P<pk>[0-9]+)/edit/$', views.soggetto_edit, name='soggetto_edit'),
+    
+    url(r'^gara/new/$', views.gara_new, name='gara_new'),
+    url(r'^gara/(?P<pk>[0-9]+)/$', views.gara_detail, name='gara_detail'),  
+    url(r'^gara/(?P<pk>[0-9]+)/edit/$', views.gara_edit, name='gara_edit'),
+    
+    url(r'^azienda/new/$', views.azienda_new, name='azienda_new'),
+    url(r'^azienda/(?P<pk>[0-9]+)/$', views.azienda_detail, name='azienda_detail'), 
+    url(r'^azienda/(?P<pk>[0-9]+)/edit/$', views.azienda_edit, name='azienda_edit'), 
 ]

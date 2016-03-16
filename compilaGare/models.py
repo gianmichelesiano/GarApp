@@ -31,3 +31,10 @@ class Soggetto(models.Model):
     citta = models.CharField(max_length=20)
     data_di_nascita = models.DateField(blank=True, null=True)
     sesso  = models.CharField(max_length=1, choices=SESSO_CHOICES)
+    
+    
+class Gara(models.Model):
+    campo_gara_prova = models.CharField(max_length=30)
+    
+class Azienda(models.Model):
+    campo_azienda_prova = models.CharField(max_length=30)
